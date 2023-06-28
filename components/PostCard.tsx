@@ -1,13 +1,14 @@
+import { Edge } from "../services";
+
 interface Post {
-    title: string;
-    excerpt: string;
+    post: Edge;
 }
 
-const PostCard = (post: Post) => {
+const PostCard = ({ post }: Post) => {
     return (
         <div>
-            {post.title}
-            {post.excerpt}
+            {post.node.title}
+            {post.node.excerpt}
         </div>
     );
 };

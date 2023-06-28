@@ -28,7 +28,7 @@ interface Node {
     categories: Category[];
 }
 
-interface Edge {
+export interface Edge {
     node: Node;
 }
 
