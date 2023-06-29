@@ -1,6 +1,6 @@
-import { Edge } from "../services";
-import Image from "next/image";
-import Link from "next/link";
+import { Edge } from '../services';
+import Image from 'next/image';
+import Link from 'next/link';
 
 interface Post {
     post: Edge;
@@ -51,11 +51,11 @@ const PostCard = ({ post }: Post) => {
                     </svg>
                     <span className="align-middle">
                         {new Date(post.node.createdAt).toLocaleDateString(
-                            "en-US",
+                            'en-US',
                             {
-                                month: "short",
-                                day: "numeric",
-                                year: "numeric",
+                                month: 'short',
+                                day: 'numeric',
+                                year: 'numeric',
                             }
                         )}
                     </span>

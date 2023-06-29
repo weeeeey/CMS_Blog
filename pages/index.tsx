@@ -1,10 +1,10 @@
-import Head from "next/head";
-import { Categories, PostCard, PostWidget } from "../components";
-import { getPosts, Edge, RecentPost, getRecentPosts } from "../services";
+import Head from 'next/head';
+import { Categories, PostCard, PostWidget } from '../components';
+import { getPosts, Edge, RecentPosts, getRecentPosts } from '../services';
 
 interface HomeProps {
     posts: Edge[];
-    recentPosts: RecentPost[];
+    recentPosts: RecentPosts;
 }
 
 const Home = ({ posts, recentPosts }: HomeProps) => {
@@ -22,10 +22,10 @@ const Home = ({ posts, recentPosts }: HomeProps) => {
                 </div>
                 <div className="lg:col-span-4 col-span-1">
                     <div className="lg:sticky relative top-8">
-                        {posts.map((post, index) => (
-                            <PostCard post={post} key={index} />
+                        {recentPosts.posts.map((post, index) => (
+                            <PostWidget post={post} key={index} />
                         ))}
-                        <PostWidget post={recentPosts} />
+
                         <Categories />
                     </div>
                 </div>
@@ -36,7 +36,8 @@ const Home = ({ posts, recentPosts }: HomeProps) => {
 
 export async function getStaticProps() {
     const posts: Edge[] = (await getPosts()) || [];
-    const recentPosts: RecentPost[] = (await getRecentPosts()) || [];
+    const recentPosts: RecentPosts = (await getRecentPosts()) || [];
+    console.log(recentPosts);
     return {
         props: { posts, recentPosts },
     };

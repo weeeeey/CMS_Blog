@@ -1,9 +1,13 @@
-import { useState } from "react";
-import { getRecentPosts, RecentPost } from "../services/index";
+import { useState } from 'react';
+import { RecentPost } from '../services/index';
 
-const PostWidget = (post: RecentPost) => {
+interface Post {
+    post: RecentPost;
+}
+
+const PostWidget = ({ post }: Post) => {
     const [relatePosts, setRelatePosts] = useState();
-    return <div>{post.title} </div>;
+    return <div className="bg-slate-400">{post.title} </div>;
 };
 
 export default PostWidget;

@@ -1,4 +1,4 @@
-import { request, gql } from "graphql-request";
+import { request, gql } from 'graphql-request';
 
 interface Author {
     bio: string;
@@ -41,12 +41,18 @@ interface PostsConnectionResult {
 }
 
 export interface RecentPost {
-    title: string;
-    featuredImage: {
-        url: string;
+    post: {
+        title: string;
+        featuredImage: {
+            url: string;
+        };
+        createdAt: string;
+        slug: string;
     };
-    createdAt: string;
-    slug: string;
+}
+
+export interface RecentPosts {
+    posts: RecentPost[];
 }
 
 const graphqlAPI = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT;
@@ -85,7 +91,7 @@ export const getPosts = async (): Promise<Edge[]> => {
     return results.postsConnection.edges;
 };
 
-export const getRecentPosts = async (): Promise<RecentPost[]> => {
+export const getRecentPosts = async (): Promise<RecentPosts> => {
     const query = gql`
         query MyQuery {
             posts(last: 10, orderBy: createdAt_ASC) {
@@ -98,6 +104,6 @@ export const getRecentPosts = async (): Promise<RecentPost[]> => {
             }
         }
     `;
-    const results = await request<RecentPost[]>(graphqlAPI!, query);
+    const results = await request<RecentPosts>(graphqlAPI!, query);
     return results;
 };
