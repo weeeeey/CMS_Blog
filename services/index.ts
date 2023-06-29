@@ -40,6 +40,15 @@ interface PostsConnectionResult {
     postsConnection: PostsConnection;
 }
 
+export interface RecentPost {
+    title: string;
+    featuredImage: {
+        url: string;
+    };
+    createdAt: string;
+    slug: string;
+}
+
 const graphqlAPI = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT;
 
 export const getPosts = async (): Promise<Edge[]> => {
@@ -74,4 +83,21 @@ export const getPosts = async (): Promise<Edge[]> => {
     `;
     const results = await request<PostsConnectionResult>(graphqlAPI!, query);
     return results.postsConnection.edges;
+};
+
+export const getRecentPosts = async (): Promise<RecentPost[]> => {
+    const query = gql`
+        query MyQuery {
+            posts(last: 10, orderBy: createdAt_ASC) {
+                title
+                slug
+                createdAt
+                featuredImage {
+                    url
+                }
+            }
+        }
+    `;
+    const results = await request<RecentPost[]>(graphqlAPI!, query);
+    return results;
 };

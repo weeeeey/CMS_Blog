@@ -1,6 +1,4 @@
-import { graphql } from "graphql";
 import { Edge } from "../services";
-import moment from "moment";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -9,9 +7,8 @@ interface Post {
 }
 //
 const PostCard = ({ post }: Post) => {
-    console.log(post);
     return (
-        <div className="bg-white shadow-lg rounded-lg p-0 lg:p-8 pb-12 mb-8">
+        <div className="bg-white shadow-lg rounded-lg p-0 lg:p-8 pb-12 my-8">
             <div className="relative overflow-hidden shadow-md pb-80 mb-6">
                 <img
                     src={post.node.featuredImage.url}
@@ -23,7 +20,7 @@ const PostCard = ({ post }: Post) => {
                 <Link href={`/post/${post.node.slug}`}>{post.node.title}</Link>
             </h1>
             <div className="block lg:flex text-center items-center justify-center mb-8 w-full">
-                <div className="flex items-center justify-center mb-4 lg:mb-0 w-full lg:w-auto mr-8">
+                <div className="flex items-center justify-center mb-3 lg:mb-0 w-full lg:w-auto mr-8">
                     <Image
                         unoptimized
                         alt={post.node.author.name}
@@ -37,7 +34,7 @@ const PostCard = ({ post }: Post) => {
                         {post.node.author.name}
                     </p>
                 </div>
-                <div className="font-medium text-gray-700">
+                <div className="font-medium text-gray-700 mb-2">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="h-6 w-6 inline mr-2 text-pink-500"
@@ -53,7 +50,14 @@ const PostCard = ({ post }: Post) => {
                         />
                     </svg>
                     <span className="align-middle">
-                        {moment(post.node.createdAt).format("MMM DD, YYYY")}
+                        {new Date(post.node.createdAt).toLocaleDateString(
+                            "en-US",
+                            {
+                                month: "short",
+                                day: "numeric",
+                                year: "numeric",
+                            }
+                        )}
                     </span>
                 </div>
                 <p className="text-center text-lg text-gray-700 font-normal px-4 lg:px-20 mb-8">
