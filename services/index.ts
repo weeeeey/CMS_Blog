@@ -1,4 +1,4 @@
-import { request, gql } from 'graphql-request';
+import { request, gql } from "graphql-request";
 
 interface Author {
     bio: string;
@@ -41,14 +41,12 @@ interface PostsConnectionResult {
 }
 
 export interface RecentPost {
-    post: {
-        title: string;
-        featuredImage: {
-            url: string;
-        };
-        createdAt: string;
-        slug: string;
+    title: string;
+    featuredImage: {
+        url: string;
     };
+    createdAt: string;
+    slug: string;
 }
 
 export interface RecentPosts {
@@ -91,7 +89,7 @@ export const getPosts = async (): Promise<Edge[]> => {
     return results.postsConnection.edges;
 };
 
-export const getRecentPosts = async (): Promise<RecentPosts> => {
+export const getRecentPosts = async (): Promise<RecentPost[]> => {
     const query = gql`
         query MyQuery {
             posts(last: 10, orderBy: createdAt_ASC) {
@@ -105,5 +103,25 @@ export const getRecentPosts = async (): Promise<RecentPosts> => {
         }
     `;
     const results = await request<RecentPosts>(graphqlAPI!, query);
-    return results;
+    return results.posts;
+};
+
+export interface ICategory {
+    name: string;
+    slug: string;
+}
+interface CategoriesData {
+    categories: ICategory[];
+}
+export const getCategory = async (): Promise<ICategory[]> => {
+    const query = gql`
+        query MyQuery {
+            categories {
+                name
+                slug
+            }
+        }
+    `;
+    const results = await request<CategoriesData>(graphqlAPI!, query);
+    return results.categories;
 };
