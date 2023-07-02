@@ -10,13 +10,19 @@ const PostWidget = ({ post }: Post) => {
     const [relatePosts, setRelatePosts] = useState();
     return (
         <div className="mb-6 w-full space-x-3 flex items-center">
-            <Image
-                alt={post.title}
-                src={post.featuredImage.url}
-                width={50}
-                height={50}
-                className="align-middle rounded-lg"
-            ></Image>
+            <Link
+                href={`/post/${post.slug}`}
+                className="text-md"
+                key={post.createdAt}
+            >
+                <Image
+                    alt={post.title}
+                    src={post.featuredImage.url}
+                    width={50}
+                    height={50}
+                    className="align-middle rounded-lg"
+                ></Image>
+            </Link>
             <div className="flex flex-col">
                 {new Date(post.createdAt).toLocaleDateString("en-US", {
                     month: "short",

@@ -1,6 +1,6 @@
-import { Edge } from '../services';
-import Image from 'next/image';
-import Link from 'next/link';
+import { Edge } from "../services";
+import Image from "next/image";
+import Link from "next/link";
 
 interface Post {
     post: Edge;
@@ -8,7 +8,7 @@ interface Post {
 //
 const PostCard = ({ post }: Post) => {
     return (
-        <div className="bg-white shadow-lg rounded-lg p-0 lg:p-8 pb-12 my-8">
+        <div className="bg-white shadow-lg rounded-lg p-0 lg:p-8 pb-12 mb-8">
             <div className="relative overflow-hidden shadow-md pb-80 mb-6">
                 <img
                     src={post.node.featuredImage.url}
@@ -51,11 +51,11 @@ const PostCard = ({ post }: Post) => {
                     </svg>
                     <span className="align-middle">
                         {new Date(post.node.createdAt).toLocaleDateString(
-                            'en-US',
+                            "en-US",
                             {
-                                month: 'short',
-                                day: 'numeric',
-                                year: 'numeric',
+                                month: "short",
+                                day: "numeric",
+                                year: "numeric",
                             }
                         )}
                     </span>

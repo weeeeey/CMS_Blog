@@ -1,4 +1,4 @@
-import { Categories, PostCard, PostWidget } from "../components";
+import { Categories, Header, PostCard, PostWidget } from "../components";
 import {
     getPosts,
     getRecentPosts,
@@ -13,7 +13,6 @@ interface HomeProps {
     recentPosts: RecentPost[];
     categories: ICategory[];
 }
-
 const Home = ({ posts, recentPosts, categories }: HomeProps) => {
     return (
         <div className="container mx-auto px-10 mb-8">
