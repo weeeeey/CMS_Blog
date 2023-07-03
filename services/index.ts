@@ -1,5 +1,7 @@
 import { request, gql } from "graphql-request";
 
+const graphqlAPI = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT;
+
 export interface Edge {
     node: {
         author: {
@@ -40,8 +42,6 @@ export interface RecentPost {
 export interface RecentPosts {
     posts: RecentPost[];
 }
-
-const graphqlAPI = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT;
 
 export const getPosts = async (): Promise<Edge[]> => {
     const query = gql`
