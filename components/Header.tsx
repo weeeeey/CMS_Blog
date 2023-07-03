@@ -18,7 +18,7 @@ const Header = () => {
         return <div>Loading...</div>;
     }
     return (
-        <div className="container mx-auto px-10 mb-8">
+        <div className="container mx-auto px-10 mb-8 ">
             <div className="w-full border-b border-blue-400 py-8 inline-block">
                 <div className="md:float-left block">
                     <Link href="/">

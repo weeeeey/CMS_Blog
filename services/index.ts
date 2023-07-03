@@ -1,43 +1,31 @@
 import { request, gql } from "graphql-request";
 
-interface Author {
-    bio: string;
-    name: string;
-    id: string;
-    photo: {
-        url: string;
+export interface Edge {
+    node: {
+        author: {
+            bio: string;
+            name: string;
+            id: string;
+            photo: {
+                url: string;
+            };
+        };
+        createdAt: string;
+        slug: string;
+        title: string;
+        excerpt: string;
+        featuredImage: {
+            url: string;
+        };
+        categories: {
+            name: string;
+            slug: string;
+        };
     };
 }
 
-interface FeaturedImage {
-    url: string;
-}
-
-interface Category {
-    name: string;
-    slug: string;
-}
-
-interface Node {
-    author: Author;
-    createdAt: string;
-    slug: string;
-    title: string;
-    excerpt: string;
-    featuredImage: FeaturedImage;
-    categories: Category[];
-}
-
-export interface Edge {
-    node: Node;
-}
-
 export interface PostsConnection {
-    edges: Edge[];
-}
-
-interface PostsConnectionResult {
-    postsConnection: PostsConnection;
+    postsConnection: { edges: Edge[] };
 }
 
 export interface RecentPost {
@@ -85,7 +73,7 @@ export const getPosts = async (): Promise<Edge[]> => {
             }
         }
     `;
-    const results = await request<PostsConnectionResult>(graphqlAPI!, query);
+    const results = await request<PostsConnection>(graphqlAPI!, query);
     return results.postsConnection.edges;
 };
 
@@ -119,6 +107,28 @@ export const getCategory = async (): Promise<ICategory[]> => {
             categories {
                 name
                 slug
+            }
+        }
+    `;
+    const results = await request<CategoriesData>(graphqlAPI!, query);
+    return results.categories;
+};
+
+export const getPost = async (): Promise<ICategory[]> => {
+    const query = gql`
+        query MyQuery {
+            post(where: { slug: "" }) {
+                author {
+                    name
+                }
+                featuredImage {
+                    url
+                }
+                createdAt
+                excerpt
+                slug
+                title
+                updatedAt
             }
         }
     `;

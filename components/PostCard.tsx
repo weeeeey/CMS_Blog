@@ -8,12 +8,15 @@ interface Post {
 //
 const PostCard = ({ post }: Post) => {
     return (
-        <div className="bg-white shadow-lg rounded-lg p-0 lg:p-8 pb-12 mb-8">
-            <div className="relative overflow-hidden shadow-md pb-80 mb-6">
-                <img
-                    src={post.node.featuredImage.url}
+        <div className="bg-white shadow-lg rounded-lg p-0 lg:p-8 pb-12 mb-8 ">
+            <div className="relative overflow-hidden shadow-md pb-96 mb-6 w-full h-full">
+                <Image
                     alt={post.node.title}
-                    className="object-top absolute h-80 w-full object-cover shadow-lg rounded-t-lg lg:rounded-lg"
+                    width={1000}
+                    height={1000}
+                    src={post.node.featuredImage.url}
+                    className="object-top absolute h-full w-full object-cover shadow-lg rounded-t-lg lg:rounded-lg"
+                    loading="lazy"
                 />
             </div>
             <h1 className="transition duration-700 text-center mb-8 cursor-pointer hover:text-pink-600 text-3xl font-semibold">

@@ -52,6 +52,7 @@ export async function getStaticProps() {
     const posts: Edge[] = (await getPosts()) || [];
     const recentPosts: RecentPost[] = (await getRecentPosts()) || [];
     const categories: ICategory[] = (await getCategory()) || [];
+
     return {
         props: { posts, recentPosts, categories },
     };
