@@ -1,5 +1,5 @@
 import { Edge } from "../services";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Link from "next/link";
 
 interface Post {
@@ -12,8 +12,7 @@ const PostCard = ({ post }: Post) => {
             <div className="relative overflow-hidden shadow-md pb-96 mb-6 w-full h-full">
                 <Image
                     alt={post.node.title}
-                    width={1000}
-                    height={1000}
+                    layout="fill"
                     src={post.node.featuredImage.url}
                     className="object-top absolute h-full w-full object-cover shadow-lg rounded-t-lg lg:rounded-lg"
                     loading="lazy"

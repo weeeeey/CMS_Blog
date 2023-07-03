@@ -80,7 +80,7 @@ export const getPosts = async (): Promise<Edge[]> => {
 export const getRecentPosts = async (): Promise<RecentPost[]> => {
     const query = gql`
         query MyQuery {
-            posts(last: 10, orderBy: createdAt_ASC) {
+            posts(last: 3, orderBy: createdAt_ASC) {
                 title
                 slug
                 createdAt
@@ -114,10 +114,26 @@ export const getCategory = async (): Promise<ICategory[]> => {
     return results.categories;
 };
 
-export const getPost = async (): Promise<ICategory[]> => {
+export interface Post {
+    author: {
+        name: string;
+    };
+    featuredImage: {
+        url: string;
+    };
+    createdAt: string;
+    excerpt: string;
+    slug: string;
+    title: string;
+    updatedAt: string;
+}
+interface GetPost {
+    post: Post;
+}
+export const getPost = async (slug: string): Promise<Post> => {
     const query = gql`
-        query MyQuery {
-            post(where: { slug: "" }) {
+        query MyQuery($slug: String!) {
+            post(where: { slug: $slug }) {
                 author {
                     name
                 }
@@ -132,6 +148,6 @@ export const getPost = async (): Promise<ICategory[]> => {
             }
         }
     `;
-    const results = await request<CategoriesData>(graphqlAPI!, query);
-    return results.categories;
+    const results = await request<GetPost>(graphqlAPI!, query, { slug });
+    return results.post;
 };
