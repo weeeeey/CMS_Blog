@@ -116,16 +116,29 @@ export const getCategory = async (): Promise<ICategory[]> => {
 
 export interface Post {
     author: {
+        bio: string;
         name: string;
+        id: string;
+        photo: {
+            url: string;
+        };
     };
+    createdAt: string;
+    slug: string;
+    title: string;
+    excerpt: string;
     featuredImage: {
         url: string;
     };
-    createdAt: string;
-    excerpt: string;
-    slug: string;
-    title: string;
-    updatedAt: string;
+    categories: {
+        name: string;
+        slug: string;
+    };
+    content: {
+        text: string;
+        html: string;
+        markdown: string;
+    };
 }
 interface GetPost {
     post: Post;
@@ -135,16 +148,29 @@ export const getPost = async (slug: string): Promise<Post> => {
         query MyQuery($slug: String!) {
             post(where: { slug: $slug }) {
                 author {
+                    bio
                     name
+                    id
+                    photo {
+                        url
+                    }
                 }
+                createdAt
+                slug
+                title
+                excerpt
                 featuredImage {
                     url
                 }
-                createdAt
-                excerpt
-                slug
-                title
-                updatedAt
+                categories {
+                    name
+                    slug
+                }
+                content {
+                    text
+                    html
+                    markdown
+                }
             }
         }
     `;

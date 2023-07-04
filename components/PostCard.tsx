@@ -5,7 +5,7 @@ import Link from "next/link";
 interface Post {
     post: Edge;
 }
-//
+// 타이틀 옆에 코멘트
 const PostCard = ({ post }: Post) => {
     return (
         <div className="bg-white shadow-lg rounded-lg p-0 lg:p-8 pb-12 mb-8 ">
@@ -14,32 +14,33 @@ const PostCard = ({ post }: Post) => {
                     alt={post.node.title}
                     layout="fill"
                     src={post.node.featuredImage.url}
-                    className="object-top absolute h-full w-full object-cover shadow-lg rounded-t-lg lg:rounded-lg"
+                    className="absolute shadow-lg rounded-t-lg lg:rounded-lg"
                     loading="lazy"
                 />
             </div>
-            <h1 className="transition duration-700 text-center mb-8 cursor-pointer hover:text-pink-600 text-3xl font-semibold">
+            <h1 className="mx-14 transition duration-700 text-center mb-8 cursor-pointer hover:text-pink-600 text-3xl font-semibold">
                 <Link href={`/post/${post.node.slug}`}>{post.node.title}</Link>
             </h1>
             <div className="block lg:flex text-center items-center justify-center mb-8 w-full">
-                <div className="flex items-center justify-center mb-3 lg:mb-0 w-full lg:w-auto mr-8">
+                <div className="flex lg:flex-none items-center justify-center mb-3 lg:mb-0 w-full lg:w-auto mr-8">
                     <Image
                         unoptimized
                         alt={post.node.author.name}
-                        height={50}
-                        width={50}
+                        height={40}
+                        width={40}
                         src={post.node.author.photo.url}
-                        className="align-middle rounded-full"
+                        className="align-middle rounded-full flex-shrink-0"
                         loading="lazy"
                     />
                     <p className="inline align-middle text-gray-700 ml-2 font-medium text-lg">
                         {post.node.author.name}
                     </p>
                 </div>
-                <div className="font-medium text-gray-700 mb-2">
+
+                <div className="font-medium text-gray-700 mb-2 flex justify-center space-x-2 items-center">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-6 w-6 inline mr-2 text-pink-500"
+                        className="h-6 w-6 inline text-pink-500"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -51,7 +52,7 @@ const PostCard = ({ post }: Post) => {
                             d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                         />
                     </svg>
-                    <span className="align-middle">
+                    <span className="align-middle ">
                         {new Date(post.node.createdAt).toLocaleDateString(
                             "en-US",
                             {
@@ -62,8 +63,10 @@ const PostCard = ({ post }: Post) => {
                         )}
                     </span>
                 </div>
-                <p className="text-center text-lg text-gray-700 font-normal px-4 lg:px-20 mb-8">
-                    {post.node.excerpt}
+                <p className="text-center text-lg text-gray-700 font-normal px-4 lg:px-20 lg:mb-0 mb-8">
+                    {post.node.excerpt.length > 100
+                        ? post.node.excerpt.slice(0, 80) + "..."
+                        : post.node.excerpt}
                 </p>
                 <div className="text-center">
                     <Link href={`/post/${post.node.slug}`}>

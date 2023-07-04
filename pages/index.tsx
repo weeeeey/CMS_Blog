@@ -1,19 +1,10 @@
-import { Categories, Header, PostCard, PostWidget } from "../components";
-import {
-    getPosts,
-    getRecentPosts,
-    getCategory,
-    Edge,
-    RecentPost,
-    ICategory,
-} from "../services";
+import { Categories, PostCard, PostWidget } from "../components";
+import { getPosts, Edge } from "../services";
 
 interface HomeProps {
     posts: Edge[];
-    recentPosts: RecentPost[];
-    categories: ICategory[];
 }
-const Home = ({ posts, recentPosts, categories }: HomeProps) => {
+const Home = ({ posts }: HomeProps) => {
     return (
         <div className="container mx-auto px-10 mb-8">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
@@ -36,11 +27,9 @@ const Home = ({ posts, recentPosts, categories }: HomeProps) => {
 
 export async function getStaticProps() {
     const posts: Edge[] = (await getPosts()) || [];
-    const recentPosts: RecentPost[] = (await getRecentPosts()) || [];
-    const categories: ICategory[] = (await getCategory()) || [];
 
     return {
-        props: { posts, recentPosts, categories },
+        props: { posts },
     };
 }
 

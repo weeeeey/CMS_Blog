@@ -21,9 +21,9 @@ const PostWidget = () => {
             <h3 className="text-xl mb-8 font-semibold border-b pb-4">
                 Recent Posts
             </h3>
-            {recentPosts?.map((post, idx) => (
+            {recentPosts?.map((post) => (
                 <div
-                    key={idx}
+                    key={post.slug}
                     className="mb-6 w-full space-x-3 flex items-center"
                 >
                     <Link
