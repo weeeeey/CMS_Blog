@@ -1,3 +1,4 @@
+import { graphql } from "graphql";
 import { request, gql } from "graphql-request";
 
 const graphqlAPI = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT;
@@ -176,4 +177,30 @@ export const getPost = async (slug: string): Promise<Post> => {
     `;
     const results = await request<GetPost>(graphqlAPI!, query, { slug });
     return results.post;
+};
+
+export interface Comment {
+    email: string;
+    name: string;
+    createdAt: string;
+    updatedAt: string;
+    comment: string;
+}
+interface CommentResult {
+    comments: Comment[];
+}
+export const getComments = async (): Promise<Comment[]> => {
+    const query = gql`
+        query MyQuery {
+            comments {
+                email
+                comment
+                name
+                createdAt
+                updatedAt
+            }
+        }
+    `;
+    const result = await request<CommentResult>(graphqlAPI!, query);
+    return result.comments;
 };
