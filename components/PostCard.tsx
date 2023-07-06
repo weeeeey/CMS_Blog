@@ -8,7 +8,7 @@ interface Post {
 // 타이틀 옆에 코멘트
 const PostCard = ({ post }: Post) => {
     return (
-        <div className="bg-white shadow-lg rounded-lg p-0 lg:p-8 pb-12 mb-8 ">
+        <div className="bg-white shadow-lg rounded-lg p-8 pb-12 mb-8 ">
             <div className="relative overflow-hidden shadow-md pb-96 mb-6 w-full h-full">
                 <Image
                     alt={post.node.title}
@@ -18,11 +18,11 @@ const PostCard = ({ post }: Post) => {
                     loading="lazy"
                 />
             </div>
-            <h1 className="mx-14 transition duration-700 text-center mb-8 cursor-pointer hover:text-pink-600 text-3xl font-semibold">
+            <h1 className=" transition duration-500 text-center mb-8 cursor-pointer hover:text-pink-600 text-3xl font-semibold">
                 <Link href={`/post/${post.node.slug}`}>{post.node.title}</Link>
             </h1>
-            <div className="block lg:flex text-center items-center justify-center mb-8 w-full">
-                <div className="flex lg:flex-none items-center justify-center mb-3 lg:mb-0 w-full lg:w-auto mr-8">
+            <div className="flex flex-col text-center items-center justify-center mb-8 w-full">
+                <div className="flex items-center justify-center mb-3 w-full lg:w-auto">
                     <Image
                         unoptimized
                         alt={post.node.author.name}
@@ -37,7 +37,7 @@ const PostCard = ({ post }: Post) => {
                     </p>
                 </div>
 
-                <div className="font-medium text-gray-700 mb-2 flex justify-center space-x-2 items-center">
+                <div className="font-medium text-gray-700 mb-2 flex justify-center space-x-2 items-center ">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="h-6 w-6 inline text-pink-500"
@@ -63,14 +63,12 @@ const PostCard = ({ post }: Post) => {
                         )}
                     </span>
                 </div>
-                <p className="text-center text-lg text-gray-700 font-normal px-4 lg:px-20 lg:mb-0 mb-8">
-                    {post.node.excerpt.length > 100
-                        ? post.node.excerpt.slice(0, 80) + "..."
-                        : post.node.excerpt}
+                <p className="text-center text-lg text-gray-700 font-normal px-4 lg:px-20 my-4">
+                    {post.node.excerpt}
                 </p>
                 <div className="text-center">
                     <Link href={`/post/${post.node.slug}`}>
-                        <span className="bg-pink-600 rounded-full text-lg  cursor-pointer font-medium py-3 px-8 text-white inline-block hover:-translate-y-2 ease transition duration-500">
+                        <span className="bg-pink-500 hover:bg-pink-600 rounded-full text-lg  cursor-pointer font-medium py-3 px-8 text-white inline-block hover:-translate-y-2 ease transition duration-500">
                             Continue Reading
                         </span>
                     </Link>

@@ -25,8 +25,8 @@ const PostDetail = () => {
     return post ? (
         <div className="container mx-auto px-10 mb-8 grid grid-cols-1 lg:grid-cols-12 gap-12">
             <div className="lg:col-span-8 col-span-1">
-                <div className="bg-white shadow-lg rounded-lg p-0 lg:p-8 pb-12 mb-8 ">
-                    <div className="relative overflow-hidden shadow-md pb-96 mb-4 w-full h-full">
+                <div className="bg-white shadow-lg rounded-lg p-8 pb-12 ">
+                    <div className="relative overflow-hidden shadow-md pb-96 mb-8 w-full h-full">
                         <Image
                             alt={post.title}
                             layout="fill"
@@ -35,7 +35,7 @@ const PostDetail = () => {
                             loading="lazy"
                         />
                     </div>
-                    <div className="text-gray-700 font-medium space-x-2 flex items-center lg:justify-start justify-center  text-sm mb-3 lg:mb-0 w-full lg:w-auto mr-8">
+                    <div className=" text-gray-700 font-medium space-x-2 flex items-center lg:justify-start justify-center  text-sm mb-4 lg:mb-0 w-full lg:w-auto mr-8">
                         <Image
                             alt={post.author.name}
                             height={32}
@@ -76,7 +76,7 @@ const PostDetail = () => {
                         </div>
                     </div>
 
-                    <h1 className="mt-4 mb-8  text-3xl font-semibold border-b-4 pb-4">
+                    <h1 className="my-8 text-3xl font-semibold border-b-4 pb-4">
                         {post.title}
                     </h1>
                     <div className="block lg:flex items-center justify-center mb-8 w-full">

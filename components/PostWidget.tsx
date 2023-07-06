@@ -36,7 +36,7 @@ const PostWidget = () => {
                             src={post.featuredImage.url}
                             width={100}
                             height={100}
-                            className="align-middle rounded-lg"
+                            className=" align-middle rounded-full hover:ring-2 hover:ring-offset-2 hover:ring-slate-700"
                         ></Image>
                     </Link>
                     <div className="flex flex-col">
@@ -47,7 +47,8 @@ const PostWidget = () => {
                         })}
                         <Link
                             href={`/post/${post.slug}`}
-                            className="text-md"
+                            className="text-md hover:underline textunder "
+                            style={{ textUnderlineOffset: "5px" }}
                             key={post.createdAt}
                         >
                             {post.title.length > 15

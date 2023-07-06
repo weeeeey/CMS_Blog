@@ -204,3 +204,56 @@ export const getComments = async (): Promise<Comment[]> => {
     const result = await request<CommentResult>(graphqlAPI!, query);
     return result.comments;
 };
+
+export interface CategoryPost {
+    slug: string;
+    title: string;
+    excerpt: string;
+    author: {
+        name: string;
+        photo: {
+            url: string;
+        };
+    };
+}
+interface ResultGetCategoryPosts {
+    category: {
+        posts: Edge[];
+    };
+}
+
+export const getCategoryPosts = async (slug: string): Promise<Edge[]> => {
+    const query = gql`
+        query MyQuery($slug: String!) {
+            postsConnection(where: { categories_some: { slug: $slug } }) {
+                edges {
+                    node {
+                        author {
+                            bio
+                            name
+                            id
+                            photo {
+                                url
+                            }
+                        }
+                        createdAt
+                        slug
+                        title
+                        excerpt
+                        featuredImage {
+                            url
+                        }
+                        categories {
+                            name
+                            slug
+                        }
+                    }
+                }
+            }
+        }
+    `;
+    const result = await request<PostsConnection>(graphqlAPI!, query, {
+        slug,
+    });
+    return result.postsConnection.edges;
+};

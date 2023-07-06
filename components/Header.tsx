@@ -4,19 +4,13 @@ import { useEffect, useState } from "react";
 
 const Header = () => {
     const [categories, setCategories] = useState<ICategory[]>([]);
-    const [loading, setLoading] = useState(true);
     useEffect(() => {
-        getCategory()
-            .then((newCate) => {
-                setCategories(newCate);
-            })
-            .finally(() => {
-                setLoading(false);
-            });
+        (async () => {
+            const cs = await getCategory();
+            setCategories(cs.reverse());
+            console.log(cs);
+        })();
     }, []);
-    if (loading) {
-        return <div>Loading...</div>;
-    }
     return (
         <div className="container mx-auto px-10 mb-8 ">
             <div className="w-full border-b border-blue-400 py-8 inline-block">
@@ -27,10 +21,10 @@ const Header = () => {
                         </span>
                     </Link>
                 </div>
-                <div className="hidden md:float-left md:contents">
-                    {categories.map((cate, idx) => (
-                        <Link key={idx} href={`/cate/${cate.slug}`}>
-                            <span className="md:float-right mt-2 align-middle text-white ml-4 font-semibold cursor-pointer">
+                <div className="md:float-right md:contents">
+                    {categories.map((cate) => (
+                        <Link key={cate.slug} href={`/category/${cate.slug}`}>
+                            <span className="hover:ring hover:ring-offset-2 p-2 rounded-full md:float-right mt-2 align-middle text-white ml-4 font-semibold cursor-pointer">
                                 {cate.name}
                             </span>
                         </Link>

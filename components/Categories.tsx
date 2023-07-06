@@ -18,7 +18,10 @@ const Categories = () => {
             </h3>
             {categories?.map((cate) => (
                 <Link key={cate.slug} href={`/category/${cate.slug}`}>
-                    <span className="hover:cursor-pointer mb-6 w-full space-x-3 flex items-center font-medium">
+                    <span
+                        style={{ textUnderlineOffset: "5px" }}
+                        className="hover:underline hover:cursor-pointer mb-6 w-full space-x-3 flex items-center font-medium border-b pb-2"
+                    >
                         {cate.name}
                     </span>
                 </Link>
