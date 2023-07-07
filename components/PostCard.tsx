@@ -9,12 +9,12 @@ interface Post {
 const PostCard = ({ post }: Post) => {
     return (
         <div className="bg-white shadow-lg rounded-lg p-8 pb-12 mb-8 ">
-            <div className="relative overflow-hidden shadow-md pb-96 mb-6 w-full h-full">
+            <div className="relative z-0 shadow-md pb-96 mb-6 w-full h-full">
                 <Image
                     alt={post.node.title}
                     layout="fill"
                     src={post.node.featuredImage.url}
-                    className="absolute shadow-lg rounded-t-lg lg:rounded-lg"
+                    className="shadow-lg rounded-t-lg lg:rounded-lg"
                     loading="lazy"
                 />
             </div>
@@ -29,7 +29,7 @@ const PostCard = ({ post }: Post) => {
                         height={40}
                         width={40}
                         src={post.node.author.photo.url}
-                        className="align-middle rounded-full flex-shrink-0"
+                        className="align-middle rounded-full"
                         loading="lazy"
                     />
                     <p className="inline align-middle text-gray-700 ml-2 font-medium text-lg">

@@ -1,4 +1,4 @@
-import { Categories, PostCard, PostWidget } from "../components";
+import { Categories, PostCard, PostWidget, SideBar } from "../components";
 import { getPosts, Edge } from "../services";
 
 interface HomeProps {
