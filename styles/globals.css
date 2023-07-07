@@ -21,3 +21,6 @@ body {
         background-size: cover;
     }
 }
+.blur-effect {
+    filter: blur(24px);
+}

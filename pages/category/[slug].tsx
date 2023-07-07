@@ -24,7 +24,7 @@ const Category = () => {
                           ))
                         : "Loading"}
                 </div>
-                <div className="col-span-1 lg:col-span-4">
+                <div className="hidden lg:block col-span-1 lg:col-span-4">
                     <Categories />
                 </div>
             </div>

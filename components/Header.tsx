@@ -11,9 +11,9 @@ const Header = () => {
             setCategories(cs);
         })();
     }, []);
+
     return (
-        <div className="container mx-auto px-10 mb-8 ">
-            <SideBar />
+        <div className={`container mx-auto px-10 mb-8 `}>
             <div className="flex justify-between w-full border-b border-blue-400 py-8 ">
                 <Link href="/">
                     <span className="cursor-pointer font-bold text-4xl text-white">
