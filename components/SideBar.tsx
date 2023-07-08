@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 import {
     getCategory,
     ICategory,
     getRecentPosts,
     RecentPost,
-} from "../services";
+} from '../services';
+import Link from 'next/link';
 
 interface IProp {
     isOpen: boolean;
@@ -29,9 +30,9 @@ const SideBar = () => {
                 setShowBtn(false);
             }
         };
-        window.addEventListener("scroll", handleScroll);
+        window.addEventListener('scroll', handleScroll);
         return () => {
-            window.removeEventListener("scroll", handleScroll);
+            window.removeEventListener('scroll', handleScroll);
         };
     }, []);
     useEffect(() => {
@@ -58,13 +59,13 @@ const SideBar = () => {
                     {toggle === false ? (
                         <button
                             onClick={changeToggle}
-                            className="w-10 bg-black h-10 rounded-full -left-1 mt-8 ml-7"
+                            className="w-10 bg-black h-10 rounded-full mx-3"
                         ></button>
                     ) : (
-                        <div className="flex-col flex min-h-screen rounded-lg ">
+                        <div className="flex-col flex min-h-screen  bg-white">
                             <button
                                 onClick={changeToggle}
-                                className="bg-blue-400 w-full h-10 rounded-full"
+                                className="bg-white w-10 h-10 rounded-full mx-3"
                             >
                                 X
                             </button>
@@ -72,9 +73,23 @@ const SideBar = () => {
                                 Category
                             </h2>
                             {data.categories.map((c) => (
-                                <div key={c.slug} className="text-xl">
-                                    {c.name}
-                                </div>
+                                <Link href={`/post/${c.slug}`} key={c.slug}>
+                                    <span className="text-xl font-ligh mt-4 ml-6 border border-white hover:border-b-black inline-block ">
+                                        {c.name}
+                                    </span>
+                                </Link>
+                            ))}
+                            <h2 className="mt-8 text-3xl font-semibold border-b-2">
+                                Recent Posts
+                            </h2>
+                            {data.posts.map((c) => (
+                                <Link href={`/post/${c.slug}`} key={c.slug}>
+                                    <span className="text-xl font-ligh mt-4 ml-6 border border-white hover:border-b-black inline-block  ">
+                                        {c.title.length > 25
+                                            ? c.title.slice(0, 25) + '...'
+                                            : c.title}
+                                    </span>
+                                </Link>
                             ))}
                         </div>
                     )}
