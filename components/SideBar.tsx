@@ -55,14 +55,14 @@ const SideBar = () => {
     return (
         <>
             {showBtn && (
-                <div className="w-full z-50 lg:hidden fixed h-screen">
+                <div className="w-full z-10 lg:hidden fixed h-screen">
                     {toggle === false ? (
                         <button
                             onClick={changeToggle}
                             className="w-10 bg-black h-10 rounded-full mx-3"
                         ></button>
                     ) : (
-                        <div className="flex-col flex min-h-screen  bg-white">
+                        <div className="flex-col flex min-h-screen max-w-full bg-slate-500">
                             <button
                                 onClick={changeToggle}
                                 className="bg-white w-10 h-10 rounded-full mx-3"
@@ -74,7 +74,7 @@ const SideBar = () => {
                             </h2>
                             {data.categories.map((c) => (
                                 <Link href={`/post/${c.slug}`} key={c.slug}>
-                                    <span className="text-xl font-ligh mt-4 ml-6 border border-white hover:border-b-black inline-block ">
+                                    <span className="text-xl font-light mt-4 ml-6 border border-white hover:border-b-black inline-block ">
                                         {c.name}
                                     </span>
                                 </Link>
@@ -84,11 +84,15 @@ const SideBar = () => {
                             </h2>
                             {data.posts.map((c) => (
                                 <Link href={`/post/${c.slug}`} key={c.slug}>
-                                    <span className="text-xl font-ligh mt-4 ml-6 border border-white hover:border-b-black inline-block  ">
-                                        {c.title.length > 25
-                                            ? c.title.slice(0, 25) + "..."
-                                            : c.title}
-                                    </span>
+                                    <div className="text-xl font-light truncate max-w-xl block h-8 mt-4 ml-6 pb-16 relative group">
+                                        <span className="border border-white hover:border-b-black ">
+                                            {c.title}
+                                        </span>
+                                        {/*  inset-0 z-20 absolute text-sm bg-black border border-gray-300 px-2 py-1 mt-2 rounded-md shadow-lg whitespace-nowrap opacity-0 group-hover:opacity-100 */}
+                                        <span className="absolute top-10 scale-0 rounded bg-gray-800 p-2 text-xs text-white group-hover:scale-100">
+                                            {c.title}
+                                        </span>
+                                    </div>
                                 </Link>
                             ))}
                         </div>
