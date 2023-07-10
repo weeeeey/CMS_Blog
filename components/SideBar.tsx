@@ -6,6 +6,7 @@ import {
     RecentPost,
 } from "../services";
 import Link from "next/link";
+import Image from "next/legacy/image";
 
 interface IProp {
     isOpen: boolean;
@@ -28,6 +29,7 @@ const SideBar = () => {
                 setShowBtn(true);
             } else {
                 setShowBtn(false);
+                setToggle(false);
             }
         };
         window.addEventListener("scroll", handleScroll);
@@ -55,48 +57,98 @@ const SideBar = () => {
     return (
         <>
             {showBtn && (
-                <div className="w-full z-10 lg:hidden fixed h-screen">
-                    {toggle === false ? (
+                <div className={`w-full z-10 lg:hidden fixed h-screen`}>
+                    <button
+                        onClick={changeToggle}
+                        className={`absolute w-10 h-10 mx-3 `}
+                    >
+                        <svg
+                            fill="#000000"
+                            height="20px"
+                            width="20px"
+                            version="1.1"
+                            id="Layer_1"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 150 150"
+                        >
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g
+                                id="SVGRepo_tracerCarrier"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            ></g>
+                            <g id="SVGRepo_iconCarrier">
+                                {" "}
+                                <g id="XMLID_240_">
+                                    {" "}
+                                    <path
+                                        id="XMLID_241_"
+                                        d="M15,30h120c8.284,0,15-6.716,15-15s-6.716-15-15-15H15C6.716,0,0,6.716,0,15S6.716,30,15,30z"
+                                    ></path>{" "}
+                                    <path
+                                        id="XMLID_242_"
+                                        d="M135,60H15C6.716,60,0,66.716,0,75s6.716,15,15,15h120c8.284,0,15-6.716,15-15S143.284,60,135,60z"
+                                    ></path>{" "}
+                                    <path
+                                        id="XMLID_243_"
+                                        d="M135,120H15c-8.284,0-15,6.716-15,15s6.716,15,15,15h120c8.284,0,15-6.716,15-15S143.284,120,135,120z"
+                                    ></path>{" "}
+                                </g>{" "}
+                            </g>
+                        </svg>
+                    </button>
+                    <aside
+                        className={`duration-300 ${
+                            toggle ? "translate-y-0" : "-translate-y-full"
+                        } flex-col flex min-h-screen w-full bg-white `}
+                    >
                         <button
                             onClick={changeToggle}
-                            className="w-10 bg-black h-10 rounded-full mx-3"
-                        ></button>
-                    ) : (
-                        <div className="flex-col flex min-h-screen max-w-full bg-slate-500">
-                            <button
-                                onClick={changeToggle}
-                                className="bg-white w-10 h-10 rounded-full mx-3"
-                            >
-                                X
-                            </button>
-                            <h2 className="mt-8 text-3xl font-semibold border-b-2">
-                                Category
-                            </h2>
-                            {data.categories.map((c) => (
-                                <Link href={`/post/${c.slug}`} key={c.slug}>
-                                    <span className="text-xl font-light mt-4 ml-6 border border-white hover:border-b-black inline-block ">
-                                        {c.name}
-                                    </span>
-                                </Link>
-                            ))}
-                            <h2 className="mt-8 text-3xl font-semibold border-b-2">
-                                Recent Posts
-                            </h2>
-                            {data.posts.map((c) => (
-                                <Link href={`/post/${c.slug}`} key={c.slug}>
-                                    <div className="text-xl font-light truncate max-w-xl block h-8 mt-4 ml-6 pb-16 relative group">
-                                        <span className="border border-white hover:border-b-black ">
+                            className="bg-white w-10 h-10 rounded-full mx-3"
+                        >
+                            X
+                        </button>
+                        <h2 className="mt-8 text-3xl font-semibold border-b-2">
+                            Category
+                        </h2>
+                        {data.categories.map((c) => (
+                            <Link href={`/post/${c.slug}`} key={c.slug}>
+                                <div className="text-xl font-light mt-4 ml-6 hover:text-pink-300 duration-200">
+                                    {c.name}
+                                </div>
+                            </Link>
+                        ))}
+                        <h2 className="mt-8 text-3xl font-semibold border-b-2">
+                            Recent Posts
+                        </h2>
+                        {data.posts.map((c) => (
+                            <Link href={`/post/${c.slug}`} key={c.slug}>
+                                <div className="rounded-lg text-xl font-light max-w-xl flex items-center mt-4 ml-6 py-4 shadow-lg hover:text-pink-300 duration-200">
+                                    <Image
+                                        src={c.featuredImage.url}
+                                        width={100}
+                                        height={100}
+                                        alt={c.title}
+                                        className="rounded-lg"
+                                    ></Image>
+                                    <div className="flex flex-col w-4/5 pl-2">
+                                        <div className="truncate font-light  ">
                                             {c.title}
-                                        </span>
-                                        {/*  inset-0 z-20 absolute text-sm bg-black border border-gray-300 px-2 py-1 mt-2 rounded-md shadow-lg whitespace-nowrap opacity-0 group-hover:opacity-100 */}
-                                        <span className="absolute top-10 scale-0 rounded bg-gray-800 p-2 text-xs text-white group-hover:scale-100">
-                                            {c.title}
-                                        </span>
+                                        </div>
+                                        <div className="text-base text-black ">
+                                            {new Date(
+                                                c.createdAt
+                                            ).toLocaleDateString("en-US", {
+                                                month: "short",
+                                                day: "numeric",
+                                                year: "numeric",
+                                            })}
+                                        </div>
                                     </div>
-                                </Link>
-                            ))}
-                        </div>
-                    )}
+                                </div>
+                            </Link>
+                        ))}
+                    </aside>
                 </div>
             )}
         </>
