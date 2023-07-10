@@ -57,7 +57,7 @@ const SideBar = () => {
     return (
         <>
             {showBtn && (
-                <div className={`w-full z-10 lg:hidden fixed h-screen`}>
+                <div className={`w-full lg:hidden fixed z-10`}>
                     <button
                         onClick={changeToggle}
                         className={`absolute w-10 h-10 mx-3 `}
@@ -98,7 +98,7 @@ const SideBar = () => {
                         </svg>
                     </button>
                     <aside
-                        className={`duration-300 ${
+                        className={`duration-300  ${
                             toggle ? "translate-y-0" : "-translate-y-full"
                         } flex-col flex min-h-screen w-full bg-white `}
                     >

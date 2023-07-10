@@ -8,7 +8,7 @@ interface Post {
 // 타이틀 옆에 코멘트
 const PostCard = ({ post }: Post) => {
     return (
-        <div className="bg-white shadow-lg rounded-lg p-8 pb-12 mb-8 ">
+        <div className="bg-white shadow-lg rounded-lg p-8 pb-12 mb-8 w-full">
             <div className="relative z-0 shadow-md pb-96 mb-6 w-full h-full">
                 <Image
                     alt={post.node.title}
@@ -18,9 +18,9 @@ const PostCard = ({ post }: Post) => {
                     loading="lazy"
                 />
             </div>
-            <h1 className=" transition duration-500 text-center mb-8 cursor-pointer hover:text-pink-600 text-3xl font-semibold">
+            <div className="transition duration-500 text-center mb-8 cursor-pointer hover:text-pink-600 text-3xl font-semibold overflow-hidden">
                 <Link href={`/post/${post.node.slug}`}>{post.node.title}</Link>
-            </h1>
+            </div>
             <div className="flex flex-col text-center items-center justify-center mb-8 w-full">
                 <div className="flex items-center justify-center mb-3 w-full lg:w-auto">
                     <Image
