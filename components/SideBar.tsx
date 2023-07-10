@@ -98,7 +98,7 @@ const SideBar = () => {
                         </svg>
                     </button>
                     <aside
-                        className={`duration-300  ${
+                        className={`duration-400  ${
                             toggle ? "translate-y-0" : "-translate-y-full"
                         } flex-col flex min-h-screen w-full bg-white `}
                     >
