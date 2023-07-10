@@ -55,8 +55,56 @@ const SideBar = () => {
     return (
         <>
             {showBtn && (
+<<<<<<< HEAD
                 <div className="w-full z-50 lg:hidden fixed h-screen">
                     {toggle === false ? (
+=======
+                <div className={`w-full lg:hidden fixed z-10`}>
+                    <button
+                        onClick={changeToggle}
+                        className={`absolute w-10 h-10 mx-3 `}
+                    >
+                        <svg
+                            fill="#000000"
+                            height="20px"
+                            width="20px"
+                            version="1.1"
+                            id="Layer_1"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 150 150"
+                        >
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g
+                                id="SVGRepo_tracerCarrier"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            ></g>
+                            <g id="SVGRepo_iconCarrier">
+                                {" "}
+                                <g id="XMLID_240_">
+                                    {" "}
+                                    <path
+                                        id="XMLID_241_"
+                                        d="M15,30h120c8.284,0,15-6.716,15-15s-6.716-15-15-15H15C6.716,0,0,6.716,0,15S6.716,30,15,30z"
+                                    ></path>{" "}
+                                    <path
+                                        id="XMLID_242_"
+                                        d="M135,60H15C6.716,60,0,66.716,0,75s6.716,15,15,15h120c8.284,0,15-6.716,15-15S143.284,60,135,60z"
+                                    ></path>{" "}
+                                    <path
+                                        id="XMLID_243_"
+                                        d="M135,120H15c-8.284,0-15,6.716-15,15s6.716,15,15,15h120c8.284,0,15-6.716,15-15S143.284,120,135,120z"
+                                    ></path>{" "}
+                                </g>{" "}
+                            </g>
+                        </svg>
+                    </button>
+                    <aside
+                        className={`duration-400  ${
+                            toggle ? "translate-y-0" : "-translate-y-full"
+                        } flex-col flex min-h-screen w-full bg-white `}
+                    >
+>>>>>>> 70bc856abb348b9e17a4791b62183acbd578fa73
                         <button
                             onClick={changeToggle}
                             className="w-10 bg-black h-10 rounded-full mx-3"
