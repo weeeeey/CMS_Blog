@@ -1,6 +1,8 @@
 import { Categories, PostCard, PostWidget, SideBar } from "../components";
 import { getPosts, Edge } from "../services";
 
+import Carousel from "react-multi-carousel";
+
 interface HomeProps {
     posts: Edge[];
 }
